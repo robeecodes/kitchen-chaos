@@ -10,11 +10,6 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
-Library/PackageCache
-Library/BurstCache
-Library/ShaderCache
-Library/StateCache
-
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
