@@ -2,13 +2,16 @@ using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public static Player Instance { get; private set; }
+
     public event EventHandler<OnSelectedCounterChangeArgs> OnSelectedCounterChange;
 
     public class OnSelectedCounterChangeArgs : EventArgs {
-        public ClearCounter selectedCounter;
+        public ClearCounter SelectedCounter;
     }
-    
+
     [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float rotSpeed = 10f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask countersLayerMask;
 
@@ -20,6 +23,13 @@ public class Player : MonoBehaviour {
     private Vector3 _lastDir;
 
     private ClearCounter _selectedCounter;
+
+    private void Awake() {
+        if (Instance != null) {
+            Debug.LogError("Multiple players exist 😱");
+        }
+        Instance = this;
+    }
 
     private void Start() {
         gameInput.OnInteraction += GameInputOnInteraction;
@@ -93,7 +103,6 @@ public class Player : MonoBehaviour {
             transform.position += moveDir * (moveDist);
         }
 
-        float rotSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, rotSpeed * Time.deltaTime);
     }
 
@@ -105,7 +114,7 @@ public class Player : MonoBehaviour {
     private void SetSelectedCounter(ClearCounter selectedCounter) {
         this._selectedCounter = selectedCounter;
         OnSelectedCounterChange?.Invoke(this, new OnSelectedCounterChangeArgs() {
-            selectedCounter = _selectedCounter
+            SelectedCounter = _selectedCounter
         });
     }
 }

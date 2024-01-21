@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectedCounterVisual : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class SelectedCounterVisual : MonoBehaviour {
+    [SerializeField] private ClearCounter clearCounter;
+    [SerializeField] private GameObject visualCounter;
+
+    private void Start() {
+        Player.Instance.OnSelectedCounterChange += Player_OnSelectedCounterChange;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Player_OnSelectedCounterChange(object sender, Player.OnSelectedCounterChangeArgs e) {
+        if (e.SelectedCounter == clearCounter) {
+            Show();
+        }
+        else {
+            Hide();
+        }
+    }
+
+    private void Show() {
+        visualCounter.SetActive(true);
+    }
+
+    private void Hide() {
+        visualCounter.SetActive(false);
     }
 }
