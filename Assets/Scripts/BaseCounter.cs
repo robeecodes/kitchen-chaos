@@ -31,6 +31,11 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent {
         KitchenObject = null;
     }
 
+    public void DestroyKitchenObject() {
+        Destroy(KitchenObject.gameObject);
+        ClearKitchenObject();
+    }
+
     public bool HasKitchenObject() {
         return KitchenObject != null;
     }

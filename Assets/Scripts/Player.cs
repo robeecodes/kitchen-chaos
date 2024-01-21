@@ -136,6 +136,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     public void ClearKitchenObject() {
         _kitchenObject = null;
     }
+    
+    public void DestroyKitchenObject() {
+        Destroy(_kitchenObject.gameObject);
+        ClearKitchenObject();
+    }
 
     public bool HasKitchenObject() {
         return _kitchenObject != null;

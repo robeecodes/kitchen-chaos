@@ -7,5 +7,6 @@ public interface IKitchenObjectParent {
     public void SetKitchenObject(KitchenObject kitchenObject);
     public KitchenObject GetKitchenObject();
     public void ClearKitchenObject();
+    public void DestroyKitchenObject();
     public bool HasKitchenObject();
 }
