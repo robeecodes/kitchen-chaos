@@ -793,6 +793,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7462952842001982565, guid: 66c45486b6b0c8f44b270eb0cb1483f6,
+        type: 3}
+      propertyPath: tomatoPrefab
+      value: 
+      objectReference: {fileID: 6014552285638652031, guid: cac94f2e7d209d248b1c9012a9bff0a9,
+        type: 3}
+    - target: {fileID: -7462952842001982565, guid: 66c45486b6b0c8f44b270eb0cb1483f6,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: dc828bd0ae0eada4b9e900598b89ed7d,
+        type: 2}
     - target: {fileID: 585792156454458864, guid: 66c45486b6b0c8f44b270eb0cb1483f6,
         type: 3}
       propertyPath: m_Name
@@ -991,6 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 13
+  rotSpeed: 10
   gameInput: {fileID: 542248702}
   countersLayerMask:
     serializedVersion: 2
@@ -1003,6 +1016,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7462952842001982565, guid: 66c45486b6b0c8f44b270eb0cb1483f6,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f369e55671795045bc51f1c388a431b,
+        type: 2}
     - target: {fileID: 585792156454458864, guid: 66c45486b6b0c8f44b270eb0cb1483f6,
         type: 3}
       propertyPath: m_Name
