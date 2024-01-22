@@ -36,6 +36,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     private void Start() {
         gameInput.OnInteraction += GameInputOnInteraction;
+        gameInput.OnAlternateInteraction += GameInputOnOnAlternateInteraction;
+    }
+
+    private void GameInputOnOnAlternateInteraction(object sender, EventArgs e) {
+        if (_selectedCounter != null) {
+            _selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInputOnInteraction(object sender, EventArgs e) {
@@ -86,7 +93,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         if (!canMove) {
             // Check if movement along the x-axis is possible
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = CanMove(moveDirX, moveDist);
+            canMove = moveDir.x != 0 && CanMove(moveDirX, moveDist);
 
             if (canMove) {
                 moveDir = moveDirX;
@@ -94,7 +101,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
             else {
                 // Check if movement along the z-axis is possible
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = CanMove(moveDirZ, moveDist);
+                canMove = moveDir.z != 0 && CanMove(moveDirZ, moveDist);
 
                 if (canMove) {
                     moveDir = moveDirZ;
@@ -135,11 +142,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     public void ClearKitchenObject() {
         _kitchenObject = null;
-    }
-    
-    public void DestroyKitchenObject() {
-        Destroy(_kitchenObject.gameObject);
-        ClearKitchenObject();
     }
 
     public bool HasKitchenObject() {

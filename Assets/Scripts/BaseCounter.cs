@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 
 public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent {
-    [SerializeField] protected KitchenObjectSO kitchenObjectSO;
     [SerializeField] protected Transform counterTop;
     protected KitchenObject KitchenObject;
 
     public virtual void Interact(Player player) {
-        if (KitchenObject == null) {
-            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.Prefab, counterTop);
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+        if (!HasKitchenObject()) {
+            if (player.HasKitchenObject()) {
+                // Player Drop object
+                player.GetKitchenObject().SetKitchenObjectParent(this);
+            }
         }
         else {
-            KitchenObject.SetKitchenObjectParent(player);
+            // Player Pick up object
+            if (!player.HasKitchenObject()) {
+                KitchenObject.SetKitchenObjectParent(player);
+            }
         }
     }
+
+    public virtual void InteractAlternate(Player player) { }
 
     public Transform GetKitchenObjectFollowTransform() {
         return counterTop;
@@ -29,11 +35,6 @@ public abstract class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
     public void ClearKitchenObject() {
         KitchenObject = null;
-    }
-
-    public void DestroyKitchenObject() {
-        Destroy(KitchenObject.gameObject);
-        ClearKitchenObject();
     }
 
     public bool HasKitchenObject() {
