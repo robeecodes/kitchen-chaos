@@ -1,11 +1,8 @@
 using System;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter {
-    public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
-    public class OnProgressChangedEventArgs {
-        public float progressNormalised;
-    }
+public class CuttingCounter : BaseCounter, IHasProgress {
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOs;
 
@@ -34,8 +31,8 @@ public class CuttingCounter : BaseCounter {
                 
                 _cuttingProgress = 0;
                     
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs() {
-                    progressNormalised = 0f
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs() {
+                    ProgressNormalised = 0f
                 });
             }
         }
@@ -45,8 +42,8 @@ public class CuttingCounter : BaseCounter {
         // Chop the ingredient if it exists and isn't fully chopped
         if (_cuttingRecipeSO != null && _cuttingProgress < _cuttingRecipeSO.cuttingProgressMax) {
             _cuttingProgress++;
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs() {
-                progressNormalised = (float) _cuttingProgress / _cuttingRecipeSO.cuttingProgressMax
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs() {
+                ProgressNormalised = (float) _cuttingProgress / _cuttingRecipeSO.cuttingProgressMax
             });
             if (_cuttingProgress == _cuttingRecipeSO.cuttingProgressMax) {
                 // When fully chopped, replace ingredient with slices

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CuttingCounterVisual : MonoBehaviour {
@@ -12,12 +11,12 @@ public class CuttingCounterVisual : MonoBehaviour {
     }
 
     private void Start() {
-        cuttingCounter.OnProgressChanged += CuttingCounterOnOnProgressChanged;
+        cuttingCounter.OnProgressChanged += CuttingCounter_OnProgressChanged;
     }
 
-    private void CuttingCounterOnOnProgressChanged(object sender, CuttingCounter.OnProgressChangedEventArgs e) {
+    private void CuttingCounter_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e) {
         // Don't cut if already chopped
-        if (e.progressNormalised != 0f) {
+        if (e.ProgressNormalised != 0f) {
             _animator.SetTrigger(Cut);
         }
     }
